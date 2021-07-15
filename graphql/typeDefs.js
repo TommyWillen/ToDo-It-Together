@@ -71,6 +71,7 @@ module.exports = gql`
     getToDo(toDoId: ID!): ToDo
     getFriendsToDoByDay(date: String!, friendsList: FriendsList): [ToDo]
     getFriendsToDoByMonth(date: String!, friendsList: FriendsList): [ToDo]
+    getUserByUsername(username: String!): User
   }
   type Mutation {
     signUp(signUpInput: SignUpInput): User!
