@@ -4,8 +4,6 @@ const userSchema = new Schema({
   username: String,
   password: String,
   email: String,
-  firstName: String,
-  lastName: String,
   userImage: {
     type: String,
     default: "",
@@ -25,9 +23,9 @@ const userSchema = new Schema({
     {
       friendId: { type: Schema.Types.ObjectId, ref: "User" },
       friendName: { type: String, default: "" },
-      friendshipStart: String
+      friendshipStart: String,
     },
   ],
 });
 
-module.exports = model("User", userSchema)
+module.exports = model("User", userSchema);
