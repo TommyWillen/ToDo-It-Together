@@ -7,7 +7,7 @@ const ToDoSchema = new Schema({
     username: String,
     body: String,
     isComplete: Boolean,
-    reminder: [
+    reminders: [
         {
             body: String,
             username: String,
@@ -18,7 +18,7 @@ const ToDoSchema = new Schema({
     globality: Boolean,
     canRemind: {type: Boolean, default: false},
     canComment: {type: Boolean, default: false},
-    comment: [
+    comments: [
         {
             body: String,
             username: String,
