@@ -1,12 +1,26 @@
 const { model, Schema } = require("mongoose");
 
 const ToDoSchema = new Schema({
-    name: String,
+    toDoName: String,
     time: String,
-    date: String,
+    day: {
+        type: String,
+        default: ""
+    },
+    month: {
+        type: String,
+        default: ""
+    },
+    year: {
+        type: String,
+        default: ""
+    },
     username: String,
     body: String,
-    isComplete: Boolean,
+    isComplete: {
+        type: Boolean,
+        default: false
+    },
     reminders: [
         {
             body: String,
@@ -15,9 +29,12 @@ const ToDoSchema = new Schema({
             alertDate: String
         }
     ],
-    globality: Boolean,
-    canRemind: {type: Boolean, default: false},
-    canComment: {type: Boolean, default: false},
+    globality: {
+        type: Boolean,
+        default: true
+    },
+    canRemind: {type: Boolean, default: true},
+    canComment: {type: Boolean, default: true},
     comments: [
         {
             body: String,
@@ -26,12 +43,13 @@ const ToDoSchema = new Schema({
         }
     ],
     category: String,
-    isPublic: {type: Boolean, default: false},
+    isPublic: {type: Boolean, default: true},
     viewList: [
         {
             username: String
         }
     ],
+    createdAt: String,
     user: {
         type: Schema.Types.ObjectId,
         ref: "Users"

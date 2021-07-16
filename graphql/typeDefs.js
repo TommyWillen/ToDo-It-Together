@@ -5,7 +5,9 @@ module.exports = gql`
     id: ID!
     name: String!
     time: String!
-    date: String!
+    day: String!
+    month: String!
+    year: String!
     username: String!
     body: String!
     isComplete: Boolean!
@@ -19,6 +21,7 @@ module.exports = gql`
     viewList: [ViewList]!
     reminderCount: Int!
     commentCount: Int!
+    createdAt: String!
   }
   type Reminder {
     id: ID!
@@ -65,31 +68,32 @@ module.exports = gql`
     email: String!
   }
   type Query {
-    getGlobalToDoByUsername(globality: Boolean!, username: String!): [ToDo]
-    getToDoByDayAndUsername(date: String!, username: String!): [ToDo]
-    getToDoByMonthAndUsername(date: String!, username: String!): [ToDo]
+    getSelectedToDosByUsername(globality: Boolean!, username: String!, day: String, month: String, year: String): [ToDo]
     getToDo(toDoId: ID!): ToDo
-    getFriendsToDoByDay(date: String!, friendsList: FriendsList): [ToDo]
-    getFriendsToDoByMonth(date: String!, friendsList: FriendsList): [ToDo]
+    getFriendsToDos(day: String, month: String!, year: String!, friendsList: FriendsList): [ToDo]
     getUserByUsername(username: String!): User
   }
   type Mutation {
     signUp(signUpInput: SignUpInput): User!
     login(username: String!, password: String!): User!
     createToDo(
-      name: String!
+      toDoName: String!
       time: String
-      date: String
+      day: String
+      month: String
+      year: String
       body: String!
       globality: Boolean!
       canRemind: Boolean!
       canComment: Boolean!
       category: String
       isPublic: Boolean!
-      viewList: ViewList!
+      viewList: ViewList
     ): ToDo!
     deleteToDo(toDoId: ID!): String!
     createReminder(toDoId: ID!, alertTime: String!, alertDate: String!): ToDo!
+    deleteReminder(reminderId: ID!): Reminder!
     createComment(toDoId: ID!, body: String!): ToDo!
+    deleteComment(commentId: ID!): Comment!
   }
 `;
