@@ -66,20 +66,22 @@ module.exports = gql`
     confirmPassword: String!
     email: String!
   }
+  input CanViewList {
+    username: String!
+  }
   type Query {
     getSelectedToDosByUsername(
-      globality: Boolean!
-      username: String!
-      day: String
-      month: String
-      year: String
+      globality: Boolean!,
+      username: String!,
+      day: String,
+      month: String,
+      year: String,
     ): [ToDo]
     getToDo(toDoId: ID!): ToDo
     getFriendsToDos(
-      day: String
-      month: String!
-      year: String!
-      friendsList: FriendsList
+      day: String,
+      month: String!,
+      year: String!,
     ): [ToDo]
     getUserByUsername(username: String!): User
     getFriendRequests(username: String!): [FriendRequest]
@@ -89,46 +91,46 @@ module.exports = gql`
     signUp(signUpInput: SignUpInput): User!
     login(username: String!, password: String!): User!
     createToDo(
-      toDoName: String!
-      time: String
-      day: String
-      month: String
-      year: String
-      body: String!
-      globality: Boolean!
-      canRemind: Boolean!
-      canComment: Boolean!
-      category: String
-      isPublic: Boolean!
-      viewList: ViewList
+      toDoName: String!,
+      time: String,
+      day: String,
+      month: String,
+      year: String,
+      body: String!,
+      globality: Boolean!,
+      canRemind: Boolean!,
+      canComment: Boolean!,
+      category: String,
+      isPublic: Boolean!,
+      viewList: [CanViewList]
     ): ToDo!
     updateToDo(
-      toDoId: ID!
-      toDoName: String!
-      time: String
-      day: String
-      month: String
-      year: String
-      body: String!
-      isComplete: Boolean!
-      globality: Boolean!
-      canRemind: Boolean!
-      canComment: Boolean!
-      category: String
-      isPublic: Boolean!
-      viewList: ViewList
+      toDoId: ID!,
+      toDoName: String!,
+      time: String,
+      day: String,
+      month: String,
+      year: String,
+      body: String!,
+      isComplete: Boolean!,
+      globality: Boolean!,
+      canRemind: Boolean!,
+      canComment: Boolean!,
+      category: String,
+      isPublic: Boolean!,
+      viewList: [CanViewList]
     ): ToDo!
     deleteToDo(toDoId: ID!): String!
     createReminder(
-      toDoId: ID!
-      alertTime: String!
-      alertDate: String!
+      toDoId: ID!,
+      alertTime: String!,
+      alertDate: String!,
       body: String!
     ): ToDo!
     deleteReminder(toDoId: ID!, reminderId: ID!): Reminder!
     createComment(toDoId: ID!, body: String!): ToDo!
     deleteComment(toDoId: ID!, commentId: ID!): Comment!
-    sendFriendRequest(friendUsername: String!)
-    updateFriendRequest(friendRequestId: ID!, status: Int!)
+    sendFriendRequest(friendUsername: String!): FriendRequest!
+    updateFriendRequest(friendRequestId: ID!, status: Int!): FriendRequest!
   }
 `;

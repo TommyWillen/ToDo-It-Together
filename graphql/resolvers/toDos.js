@@ -68,7 +68,9 @@ module.exports = {
         throw new Error(error);
       }
     },
-    async getFriendsToDos(day, month, year, friendsList) {
+    async getFriendsToDos(_, {day, month, year}, context) {
+      const user = checkAuth(context)
+      
       if (day) {
         try {
           const toDo = await ToDo.find({
@@ -76,7 +78,7 @@ module.exports = {
             month: month,
             year: year,
             username: {
-              $in: [friendsList],
+              $in: [user.friendsList],
             },
           });
           if (toDo) {
@@ -93,7 +95,7 @@ module.exports = {
             month: month,
             year: year,
             username: {
-              $in: [friendsList],
+              $in: [user.friendsList],
             },
           });
           if (toDo) {

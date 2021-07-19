@@ -9,6 +9,7 @@ const {
 const User = require("../../models/User");
 
 const generateToken = (user) => {
+  console.log(process.env.SECRET_KEY)
   return jwt.sign(
     {
       id: user.id,
@@ -22,7 +23,7 @@ const generateToken = (user) => {
 
 module.exports = {
   Query: {
-      async getUserBeUsername(_, {username}) {
+      async getUserByUsername(_, {username}) {
           try {
               const user = await User.findOne({username: username})
               if (user) {
@@ -65,7 +66,7 @@ module.exports = {
     },
     async signUp(
       _,
-      { singUpInput: { username, email, password, confirmPassword } }
+      { signUpInput: { username, email, password, confirmPassword } }
     ) {
       const { valid, errors } = validateSignUpInput(
         username,
