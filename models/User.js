@@ -8,17 +8,6 @@ const userSchema = new Schema({
     type: String,
     default: "",
   },
-  sentRequest: [
-    {
-      username: String,
-    },
-  ],
-  request: [
-    {
-      userId: { type: Schema.Types.ObjectId, ref: "User" },
-      username: { type: String, default: "" },
-    },
-  ],
   friendsList: [
     {
       friendId: { type: Schema.Types.ObjectId, ref: "User" },

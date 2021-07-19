@@ -65,3 +65,36 @@ module.exports.validateToDoInput = (toDoName, body) => {
     valid: Object.keys(errors).length < 1,
   };
 };
+
+module.exports.validateDateInput = (time, day) => {
+  const dateErrors = {};
+  if (!time) {
+    dateErrors.time = "Must select a time";
+  }
+  if (!day) {
+    dateErrors.date = "Must select a valid date";
+  }
+
+  return {
+    dateErrors,
+    validDate: Object.keys(errors).length < 1,
+  };
+};
+
+module.exports.validateReminderInput = (time, date, body) => {
+  const dateErrors = {};
+  if (!time) {
+    dateErrors.time = "Must select a time";
+  }
+  if (!date) {
+    dateErrors.date = "Must select a valid date";
+  }
+  if (body.trim() === "") {
+      dateErrors.body = "Body must not be empty"
+  }
+
+  return {
+    dateErrors,
+    validDate: Object.keys(errors).length < 1,
+  };
+};

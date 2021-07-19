@@ -2,7 +2,10 @@ const { model, Schema } = require("mongoose");
 
 const ToDoSchema = new Schema({
     toDoName: String,
-    time: String,
+    time: {
+        type: String,
+        default: ""
+    },
     day: {
         type: String,
         default: ""

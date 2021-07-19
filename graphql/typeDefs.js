@@ -4,10 +4,10 @@ module.exports = gql`
   type ToDo {
     id: ID!
     name: String!
-    time: String!
-    day: String!
-    month: String!
-    year: String!
+    time: String
+    day: String
+    month: String
+    year: String
     username: String!
     body: String!
     isComplete: Boolean!
@@ -36,24 +36,23 @@ module.exports = gql`
     username: String!
     createdAt: String!
   }
+  type ViewList {
+    id: ID!
+    username: String!
+  }
   type User {
     id: ID!
     email: String!
     token: String!
     username: String!
     userImage: String!
-    sentRequest: [SentRequest]!
-    request: [Request]!
     friendsList: [FriendsList]!
   }
-  type SentRequest {
-    id: ID!
-    username: String!
-  }
-  type Request {
-    id: ID!
-    userID: String!
-    username: String!
+  type FriendRequest {
+      id: ID!
+      requester: String!
+      recipient: String!
+      status: Int!
   }
   type FriendsList {
     id: ID!
@@ -68,10 +67,23 @@ module.exports = gql`
     email: String!
   }
   type Query {
-    getSelectedToDosByUsername(globality: Boolean!, username: String!, day: String, month: String, year: String): [ToDo]
+    getSelectedToDosByUsername(
+      globality: Boolean!
+      username: String!
+      day: String
+      month: String
+      year: String
+    ): [ToDo]
     getToDo(toDoId: ID!): ToDo
-    getFriendsToDos(day: String, month: String!, year: String!, friendsList: FriendsList): [ToDo]
+    getFriendsToDos(
+      day: String
+      month: String!
+      year: String!
+      friendsList: FriendsList
+    ): [ToDo]
     getUserByUsername(username: String!): User
+    getFriendRequests(username: String!): [FriendRequest]
+    getRequestedFriends(username: String!): [FriendRequest]
   }
   type Mutation {
     signUp(signUpInput: SignUpInput): User!
@@ -90,10 +102,33 @@ module.exports = gql`
       isPublic: Boolean!
       viewList: ViewList
     ): ToDo!
+    updateToDo(
+      toDoId: ID!
+      toDoName: String!
+      time: String
+      day: String
+      month: String
+      year: String
+      body: String!
+      isComplete: Boolean!
+      globality: Boolean!
+      canRemind: Boolean!
+      canComment: Boolean!
+      category: String
+      isPublic: Boolean!
+      viewList: ViewList
+    ): ToDo!
     deleteToDo(toDoId: ID!): String!
-    createReminder(toDoId: ID!, alertTime: String!, alertDate: String!): ToDo!
-    deleteReminder(reminderId: ID!): Reminder!
+    createReminder(
+      toDoId: ID!
+      alertTime: String!
+      alertDate: String!
+      body: String!
+    ): ToDo!
+    deleteReminder(toDoId: ID!, reminderId: ID!): Reminder!
     createComment(toDoId: ID!, body: String!): ToDo!
-    deleteComment(commentId: ID!): Comment!
+    deleteComment(toDoId: ID!, commentId: ID!): Comment!
+    sendFriendRequest(username: String!, friendUsername: String!)
+    updateFriendRequest(friendRequestId: ID!, status: Int!)
   }
 `;
