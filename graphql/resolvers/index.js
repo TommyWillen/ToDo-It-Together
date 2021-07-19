@@ -1,5 +1,6 @@
 const toDosResolvers = require("./toDos");
 const userResolvers = require("./users");
+const friendRequestResolvers = require("./friendRequest");
 
 module.exports = {
   ToDo: {
@@ -9,9 +10,11 @@ module.exports = {
   Query: {
     ...userResolvers.Query,
     ...toDosResolvers.Query,
+    ...friendRequestResolvers.Query,
   },
   Mutation: {
     ...userResolvers.Mutation,
     ...toDosResolvers.Mutation,
+    ...friendRequestResolvers.Mutation,
   },
 };

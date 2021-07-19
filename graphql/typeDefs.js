@@ -128,7 +128,7 @@ module.exports = gql`
     deleteReminder(toDoId: ID!, reminderId: ID!): Reminder!
     createComment(toDoId: ID!, body: String!): ToDo!
     deleteComment(toDoId: ID!, commentId: ID!): Comment!
-    sendFriendRequest(username: String!, friendUsername: String!)
+    sendFriendRequest(friendUsername: String!)
     updateFriendRequest(friendRequestId: ID!, status: Int!)
   }
 `;
