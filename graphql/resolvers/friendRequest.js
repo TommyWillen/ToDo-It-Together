@@ -39,8 +39,8 @@ module.exports = {
         requester: friendUsername,
         recipient: username,
       });
-
-      if (currentRequest || otherCurrentRequest) {
+      console.log(currentRequest)
+      if (currentRequest.length > 0 || otherCurrentRequest > 0) {
         throw new UserInputError("Friend request already sent/recieved");
       } else {
         const newFriendRequest = new FriendRequest({
@@ -49,12 +49,13 @@ module.exports = {
           status: 1,
         });
         const friendRequest = await newFriendRequest.save();
+        console.log(friendRequest)
         return friendRequest;
       }
     },
     async updateFriendRequest(_, { friendRequestId, status }) {
-      const friendRequest = FriendRequest.findById(friendRequestId);
-
+      const friendRequest = await FriendRequest.findById(friendRequestId);
+        
       if (friendRequest) {
         if (status === 3) {
           await friendRequest.delete();
@@ -62,18 +63,20 @@ module.exports = {
         } else if (status === 2) {
           const user = await User.find({ username: friendRequest.recipient });
           const friend = await User.find({ username: friendRequest.requester });
-          user.friendsList.push({
-            friendId: friend._id,
-            friendName: friend.username,
+          
+          user[0].friendsList.unshift({
+            friendId: friend[0].id,
+            friendName: friend[0].username,
             friendshipStart: new Date().toISOString(),
           });
-          friend.friendsList.push({
-            friendId: user._id,
-            friendName: user.username,
+          friend[0].friendsList.unshift({
+            friendId: user[0].id,
+            friendName: user[0].username,
             friendshipStart: new Date().toISOString(),
           });
-          await user.save();
-          await friend.save();
+          
+          await user[0].save();
+          await friend[0].save();
           await friendRequest.delete();
           return { user, friend };
         } else {
@@ -83,5 +86,21 @@ module.exports = {
         throw new UserInputError("Friend request does not exist");
       }
     },
+    async removeFriend(_,{friendId, userId}) {
+        const user = await User.findById(userId)
+        const friend = await User.findById(friendId)
+
+        if (friend) {
+            const friendIndex = user.friendsList.findIndex(f => f.friendId === friendId)
+            const friendsUserIndex = friend.friendsList.findIndex(f => f.friendId === userId)
+            user.friendsList.splice(friendIndex,1);
+            friend.friendsList.splice(friendsUserIndex, 1);
+            await user.save()
+            await friend.save()
+            return user
+        } else {
+            throw new UserInputError("Friend not found")
+        }
+    }
   },
 };

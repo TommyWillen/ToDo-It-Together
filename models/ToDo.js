@@ -36,7 +36,7 @@ const ToDoSchema = new Schema({
         type: Boolean,
         default: true
     },
-    canRemind: {type: Boolean, default: true},
+    canRemind: {type: Boolean, default: false},
     canComment: {type: Boolean, default: true},
     comments: [
         {

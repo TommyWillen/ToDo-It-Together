@@ -10,7 +10,7 @@ const userSchema = new Schema({
   },
   friendsList: [
     {
-      friendId: { type: Schema.Types.ObjectId, ref: "User" },
+      friendId: String,
       friendName: { type: String, default: "" },
       friendshipStart: String,
     },

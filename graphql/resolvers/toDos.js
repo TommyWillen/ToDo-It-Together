@@ -1,6 +1,7 @@
 const { AuthenticationError, UserInputError } = require("apollo-server");
 
 const ToDo = require("../../models/ToDo");
+const User = require("../../models/User")
 const checkAuth = require("../../util/check-auth");
 const {
   validateToDoInput,
@@ -68,43 +69,59 @@ module.exports = {
         throw new Error(error);
       }
     },
-    async getFriendsToDos(_, {day, month, year}, context) {
-      const user = checkAuth(context)
+    async getFriendsToDos(_, { userId, isGlobal, day, month, year }, context) {
+      const user = await User.findById(userId)
       
-      if (day) {
-        try {
-          const toDo = await ToDo.find({
-            day: day,
-            month: month,
-            year: year,
-            username: {
-              $in: [user.friendsList],
-            },
-          });
-          if (toDo) {
-            return toDo;
-          } else {
-            throw new Error("No todos found");
-          }
-        } catch (error) {
-          throw new Error(error);
+      const userFriends = user.friendsList.map(friend => friend.friendName)
+      
+      if (isGlobal) {
+        const toDo = await ToDo.find({
+          globality: true,
+          username: {
+            $in: userFriends,
+          },
+        });
+        if (toDo) {
+          return toDo
+        } else {
+          throw new Error("No todo found")
         }
       } else {
-        try {
-          const toDo = await ToDo.find({
-            month: month,
-            year: year,
-            username: {
-              $in: [user.friendsList],
-            },
-          });
-          if (toDo) {
-            return toDo;
-          } else {
-            throw new Error("No todos found");
+        if (day) {
+          try {
+            const toDo = await ToDo.find({
+              day: day,
+              month: month,
+              year: year,
+              username: {
+                $in: userFriends,
+              },
+            });
+            if (toDo) {
+              return toDo;
+            } else {
+              throw new Error("No todos found");
+            }
+          } catch (error) {
+            throw new Error(error);
           }
-        } catch (error) {
-          throw new Error(error);
+        } else {
+          try {
+            const toDo = await ToDo.find({
+              month: month,
+              year: year,
+              username: {
+                $in: [user.friendsList],
+              },
+            });
+            if (toDo) {
+              return toDo;
+            } else {
+              throw new Error("No todos found");
+            }
+          } catch (error) {
+            throw new Error(error);
+          }
         }
       }
     },
@@ -206,52 +223,48 @@ module.exports = {
 
       const { username } = checkAuth(context);
 
-      try {
-        const toDo = ToDo.findById(toDoId);
+      const toDo = await ToDo.findById(toDoId);
 
-        if (toDo) {
-          if (toDo.username === username) {
-            if (globality) {
-              toDo.toDoName = toDoName;
-              toDo.time = "";
-              toDo.day = "";
-              toDo.month = "";
-              toDo.year = "";
-              toDo.body = body;
-              toDo.isComplete = isComplete;
-              toDo.globality = globality;
-              toDo.canRemind = canRemind;
-              toDo.canComment = canComment;
-              toDo.category = category;
-              toDo.isPublic = isPublic;
-              toDo.viewList = viewList;
-              await toDo.save();
-              return toDo;
-            } else {
-              toDo.toDoName = toDoName;
-              toDo.time = time;
-              toDo.day = day;
-              toDo.month = month;
-              toDo.year = year;
-              toDo.body = body;
-              toDo.isComplete = isComplete;
-              toDo.globality = globality;
-              toDo.canRemind = canRemind;
-              toDo.canComment = canComment;
-              toDo.category = category;
-              toDo.isPublic = isPublic;
-              toDo.viewList = viewList;
-              await toDo.save();
-              return toDo;
-            }
+      if (toDo) {
+        if (toDo.username === username) {
+          if (globality) {
+            toDo.toDoName = toDoName;
+            toDo.time = "";
+            toDo.day = "";
+            toDo.month = "";
+            toDo.year = "";
+            toDo.body = body;
+            toDo.isComplete = isComplete;
+            toDo.globality = globality;
+            toDo.canRemind = canRemind;
+            toDo.canComment = canComment;
+            toDo.category = category;
+            toDo.isPublic = isPublic;
+            toDo.viewList = viewList;
+            await toDo.save();
+            return toDo;
           } else {
-            throw new AuthenticationError("Action not allowed");
+            toDo.toDoName = toDoName;
+            toDo.time = time;
+            toDo.day = day;
+            toDo.month = month;
+            toDo.year = year;
+            toDo.body = body;
+            toDo.isComplete = isComplete;
+            toDo.globality = globality;
+            toDo.canRemind = canRemind;
+            toDo.canComment = canComment;
+            toDo.category = category;
+            toDo.isPublic = isPublic;
+            toDo.viewList = viewList;
+            await toDo.save();
+            return toDo;
           }
         } else {
-          throw new UserInputError("Todo not found");
+          throw new AuthenticationError("Action not allowed");
         }
-      } catch (error) {
-        throw new Error(error);
+      } else {
+        throw new UserInputError("Todo not found");
       }
     },
     async deleteToDo(_, { toDoId }, context) {
@@ -260,7 +273,7 @@ module.exports = {
       try {
         const toDo = await ToDo.findById(toDoId);
         if (user.username === toDo.username) {
-          await ToDo.delete();
+          await toDo.delete();
           return "ToDo deleted successfully";
         } else {
           throw new AuthenticationError("Action not allowed");
@@ -334,7 +347,7 @@ module.exports = {
       const toDo = await ToDo.findById(toDoId);
       if (toDo) {
         if (toDo.canComment === true) {
-          toDo.Comments.unshift({
+          toDo.comments.unshift({
             body,
             username,
             createdAt: new Date().toISOString(),
@@ -354,7 +367,7 @@ module.exports = {
       const toDo = await ToDo.findById(toDoId);
 
       if (toDo) {
-        const commentIndex = post.comments.findIndex((c) => c.id === commentId);
+        const commentIndex = toDo.comments.findIndex((c) => c.id === commentId);
         if (
           toDo.username === username ||
           toDo.comments[commentIndex].username === username

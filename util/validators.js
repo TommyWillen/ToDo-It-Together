@@ -77,7 +77,7 @@ module.exports.validateDateInput = (time, day) => {
 
   return {
     dateErrors,
-    validDate: Object.keys(errors).length < 1,
+    validDate: Object.keys(dateErrors).length < 1,
   };
 };
 
@@ -95,6 +95,6 @@ module.exports.validateReminderInput = (time, date, body) => {
 
   return {
     dateErrors,
-    validDate: Object.keys(errors).length < 1,
+    validDate: Object.keys(dateErrors).length < 1,
   };
 };
