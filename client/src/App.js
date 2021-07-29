@@ -1,5 +1,9 @@
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
+import { AuthProvider } from "./context/auth";
+import AuthRoute from "./utils/AuthRoute";
+import NoAuthRoute from "./utils/NoAuthRoute";
+
 import "./App.css";
 import Navbar from "./components/Navbar";
 import About from "./pages/About";
@@ -11,16 +15,18 @@ import { Wrapper } from "./components/Grid/GridElements";
 
 function App() {
   return (
-    <Router>
-      <Navbar />
-      <Wrapper>
-        <Route exact path="/" component={Landing} />
-        <Route exact path="/about" component={About} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/profile" component={Profile} />
-        <Route exact path="/signup" component={SignUp} />
-      </Wrapper>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Navbar />
+        <Wrapper>
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/about" component={About} />
+          <AuthRoute exact path="/login" component={Login} />
+          <NoAuthRoute exact path="/profile" component={Profile} />
+          <AuthRoute exact path="/signup" component={SignUp} />
+        </Wrapper>
+      </Router>
+    </AuthProvider>
   );
 }
 

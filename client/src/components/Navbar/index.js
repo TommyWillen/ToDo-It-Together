@@ -42,7 +42,7 @@ const Navbar = () => {
   return (
     <Nav>
         <Link to="/">
-        <NavHome/> 
+        <NavHome data-testid="homeButton" /> 
         </Link>
         <Link to="/profile">
         <NavUserImage src={noPhoto} />
@@ -54,10 +54,10 @@ const Navbar = () => {
       >
         <ul>
           <li>
-            <NavLink to="/">Home</NavLink>
+            <NavLink to="/">ToDoIt Together</NavLink>
           </li>
           <li>
-            <NavLink to="/about">About ToDoIt Together</NavLink>
+            <NavLink to="/about">About The Creator</NavLink>
           </li>
           <li>
             <NavLink to="/profile">Your Profile</NavLink>
@@ -71,8 +71,8 @@ const Navbar = () => {
         </ul>
       </NavDropdownMenu>
       <NavMenu>
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/about">About ToDoIt Together</NavLink>
+        <NavLink to="/">ToDoIt Together</NavLink>
+        <NavLink to="/about">About The Creator</NavLink>
         <NavLink to="/profile">Your Profile</NavLink>
         <NavLink to="/sign-up">Sign Up</NavLink>
       </NavMenu>
