@@ -22,8 +22,9 @@ function App() {
           <Route exact path="/" component={Landing} />
           <Route exact path="/about" component={About} />
           <AuthRoute exact path="/login" component={Login} />
+          <AuthRoute exact path="/sign-up" component={SignUp} />
           <NoAuthRoute exact path="/profile" component={Profile} />
-          <AuthRoute exact path="/signup" component={SignUp} />
+          
         </Wrapper>
       </Router>
     </AuthProvider>

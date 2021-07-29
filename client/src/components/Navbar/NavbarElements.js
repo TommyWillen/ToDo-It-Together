@@ -7,7 +7,7 @@ import styled from "styled-components";
 
 
 export const Nav = styled.nav`
-  background: #63d471;
+  background: rgb(251, 238, 193, 0.9);
   height: 85px;
   display: flex;
   justify-content: space-between;
@@ -113,7 +113,7 @@ export const NavBtnLink = styled(Link)`
 `;
 
 export const NavDropdownMenu = styled.nav`
-    background: #63d471;
+    background: rgb(251, 238, 193, 0.9);
     border-radius: 8px 0 0 0;
     position: fixed;
     
@@ -127,7 +127,7 @@ export const NavDropdownMenu = styled.nav`
     &.active {
         opacity: 1;
         visibility: visible;
-        transform: translateY(0px);
+        transform: translateY(-6px);
         display: block;
         bottom: 85px;
 

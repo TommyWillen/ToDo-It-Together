@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 import {
@@ -10,14 +10,15 @@ import {
   NavBtnLink,
   NavDropdownMenu,
   NavHome,
-  NavUserImage
+  NavUserImage,
 } from "./NavbarElements";
-import noPhoto from "../../assets/blank-profile-picture.png"
+import noPhoto from "../../assets/blank-profile-picture.png";
+import { AuthContext } from "../../context/auth";
 
 const Navbar = () => {
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useState(false);
-
+  const { user, logout } = useContext(AuthContext);
   const handleNavDropDown = () => setIsActive(!isActive);
 
   useEffect(() => {
@@ -41,12 +42,12 @@ const Navbar = () => {
 
   return (
     <Nav>
-        <Link to="/">
-        <NavHome data-testid="homeButton" /> 
-        </Link>
-        <Link to="/profile">
+      <Link to="/">
+        <NavHome data-testid="homeButton" />
+      </Link>
+      <Link to="/profile">
         <NavUserImage src={noPhoto} />
-        </Link>
+      </Link>
       <Bars onClick={handleNavDropDown} />
       <NavDropdownMenu
         ref={dropdownRef}
@@ -59,25 +60,42 @@ const Navbar = () => {
           <li>
             <NavLink to="/about">About The Creator</NavLink>
           </li>
-          <li>
-            <NavLink to="/profile">Your Profile</NavLink>
-          </li>
-          <li>
-            <NavLink to="/sign-up">Sign Up</NavLink>
-          </li>
-          <li>
-            <NavLink to="/login">Login</NavLink>
-          </li>
+          {user ? (
+            <>
+              <li>
+                <NavLink to="/profile">{user.username}'s Profile</NavLink>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <NavLink to="/sign-up">Sign Up</NavLink>
+              </li>
+              <li>
+                <NavLink to="/login">Login</NavLink>
+              </li>
+            </>
+          )}
         </ul>
       </NavDropdownMenu>
       <NavMenu>
         <NavLink to="/">ToDoIt Together</NavLink>
         <NavLink to="/about">About The Creator</NavLink>
-        <NavLink to="/profile">Your Profile</NavLink>
-        <NavLink to="/sign-up">Sign Up</NavLink>
+        {user ? (
+          <>
+          <NavLink to="/profile">{user.username}'s Profile</NavLink>
+          </>
+        ):(
+          <NavLink to="/sign-up">Sign Up</NavLink>
+        )}
       </NavMenu>
       <NavBtn>
-        <NavBtnLink to="/login">Login</NavBtnLink>
+        {user ? (
+          <NavBtnLink name="logout" onClick={logout} to="/">Logout</NavBtnLink>
+        ): (
+          <NavBtnLink to="/login">Login</NavBtnLink>
+        )}
+        
       </NavBtn>
     </Nav>
   );

@@ -9,7 +9,6 @@ const {
 const User = require("../../models/User");
 
 const generateToken = (user) => {
-  console.log(process.env.SECRET_KEY)
   return jwt.sign(
     {
       id: user.id,
