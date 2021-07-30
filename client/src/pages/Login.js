@@ -18,7 +18,6 @@ const Login = (props) => {
   const context = useContext(AuthContext);
   const [errors, setErrors] = useState({});
 
-
   const loginUserCallback = () => {
     loginUser();
   };
@@ -34,7 +33,6 @@ const Login = (props) => {
       props.history.push("/profile");
     },
     onError(err) {
-        console.log(err.graphQLErrors[0].extensions.errors)
       setErrors(err.graphQLErrors[0].extensions.errors);
     },
     variables: values,
@@ -45,7 +43,6 @@ const Login = (props) => {
       <FormTitle>Login</FormTitle>
       <InputContainer>
         <Input
-          type="text"
           placeholder="Username..."
           label="Username"
           name="username"
@@ -63,20 +60,21 @@ const Login = (props) => {
           validationFailed={errors.password ? true : false}
           onChange={onChange}
         />
+        <InputButtonContainer>
+          <InputButton content="Login" type="submit">
+            Login
+          </InputButton>
+        </InputButtonContainer>
       </InputContainer>
-      <InputButtonContainer>
-        <InputButton content="Login" type="submit"> Login </InputButton>
-      </InputButtonContainer>
+
       {Object.keys(errors).length > 0 && (
-          <InputContainer>
-            <ul>
-                {Object.values(errors).map(value => {
-                    console.log(value)
-                    return(
-                    <ErrorListItem key={value}>{value}</ErrorListItem>
-                )})}
-            </ul>
-          </InputContainer>
+        <InputContainer>
+          <ul>
+            {Object.values(errors).map((value) => {
+              return <ErrorListItem key={value}>{value}</ErrorListItem>;
+            })}
+          </ul>
+        </InputContainer>
       )}
     </FormContainer>
   );

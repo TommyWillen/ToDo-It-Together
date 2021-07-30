@@ -16,23 +16,23 @@ export const FormContainer = styled.form`
   letter-spacing: 0.4rem;
   @media only screen and (min-width: 150px) {
     width: 80vw;
-    height: 70vh;
+    height: 90vh;
     h4 {
       font-size: small;
     }
   }
   @media only screen and (min-width: 411px) {
     width: 80vw;
-    height: 70vh;
+    height: 85vh;
   }
 
   @media only screen and (min-width: 768px) {
     width: 80vw;
-    height: 70vh;
+    height: 80vh;
   }
   @media only screen and (min-width: 1024px) {
     width: 70vw;
-    height: 50vh;
+    height: 80vh;
   }
   @media only screen and (min-width: 1280px) {
     width: 30vw;
@@ -49,7 +49,7 @@ export const InputContainer = styled.div`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  height: 20%;
+  /* height: 40%; */
   width: 100%;
 `;
 
@@ -58,6 +58,8 @@ export const ErrorListItem = styled.li`
  font-weight: bold;
  list-style-type: none;
  margin-bottom: 1rem;
+ font-size: small;
+ margin-left: 1rem;
 `
 
 export const InputButtonContainer = styled.div`

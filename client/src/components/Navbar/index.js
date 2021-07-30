@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import {
   Nav,
-  NavLink,
+  NavbarLink,
   Bars,
   NavMenu,
   NavBtn,
@@ -45,9 +45,11 @@ const Navbar = () => {
       <Link to="/">
         <NavHome data-testid="homeButton" />
       </Link>
-      <Link to="/profile">
-        <NavUserImage src={noPhoto} />
+      {user ? (
+        <Link to="/profile">
+        <NavUserImage src={user.userImage ? user.userImage : noPhoto} />
       </Link>
+      ): null}
       <Bars onClick={handleNavDropDown} />
       <NavDropdownMenu
         ref={dropdownRef}
@@ -55,38 +57,38 @@ const Navbar = () => {
       >
         <ul>
           <li>
-            <NavLink to="/">ToDoIt Together</NavLink>
+            <NavbarLink exact to="/">ToDoIt Together</NavbarLink>
           </li>
           <li>
-            <NavLink to="/about">About The Creator</NavLink>
+            <NavbarLink to="/about">About The Creator</NavbarLink>
           </li>
           {user ? (
             <>
               <li>
-                <NavLink to="/profile">{user.username}'s Profile</NavLink>
+                <NavbarLink to="/profile">{user.username}'s Profile</NavbarLink>
               </li>
             </>
           ) : (
             <>
               <li>
-                <NavLink to="/sign-up">Sign Up</NavLink>
+                <NavbarLink to="/sign-up">Sign Up</NavbarLink>
               </li>
               <li>
-                <NavLink to="/login">Login</NavLink>
+                <NavbarLink to="/login">Login</NavbarLink>
               </li>
             </>
           )}
         </ul>
       </NavDropdownMenu>
       <NavMenu>
-        <NavLink to="/">ToDoIt Together</NavLink>
-        <NavLink to="/about">About The Creator</NavLink>
+        <NavbarLink exact to="/">ToDoIt Together</NavbarLink>
+        <NavbarLink to="/about">About The Creator</NavbarLink>
         {user ? (
           <>
-          <NavLink to="/profile">{user.username}'s Profile</NavLink>
+          <NavbarLink to="/profile">{user.username}'s Profile</NavbarLink>
           </>
         ):(
-          <NavLink to="/sign-up">Sign Up</NavLink>
+          <NavbarLink  to="/sign-up">Sign Up</NavbarLink>
         )}
       </NavMenu>
       <NavBtn>
