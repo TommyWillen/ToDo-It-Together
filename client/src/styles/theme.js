@@ -15,6 +15,11 @@ const Theme = {
         lg: `only screen and (max-width: ${size.lg})`,
         xl: `only screen and (max-width: ${size.xl})`,
         xxl: `only screen and (min-width: ${size.xxl})`,
+    },
+    colors: {
+        earthBlue: "#659DBD",
+        earthBlack: "#212421",
+        pickerGreen: "#085025"
     }
 } 
 

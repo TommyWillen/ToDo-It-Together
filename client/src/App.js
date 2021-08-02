@@ -1,10 +1,11 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 
+import { GlobalStyles } from "./styles/globalStyles";
 import { AuthProvider } from "./context/auth";
 import AuthRoute from "./utils/AuthRoute";
 import Theme from "./styles/theme";
-import { GlobalStyles } from "./styles/globalStyles";
+
 
 import Navbar from "./components/Navbar";
 import About from "./pages/About";

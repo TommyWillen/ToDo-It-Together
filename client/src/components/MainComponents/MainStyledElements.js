@@ -12,7 +12,7 @@ export const MainAside = styled.aside`
 `;
 
 export const MainBox = styled.main`
-  background: rgb(141, 135, 65, 0.9);
+  background: rgb(245, 245, 220, 0.9);
   height: 100vh;
   display: flex;
   margin-left: ${(props) => (props.leftGap ? props.leftGap : "-2rem")};
@@ -26,6 +26,7 @@ export const MainBox = styled.main`
 export const AsideBtn = styled(AiFillStepForward)`
   display: none;
   color: #659dbd;
+  bottom: 140px;
   @media ${(props) => props.theme.breakpoints.md} {
     display: block;
     position: absolute;
@@ -39,7 +40,7 @@ export const AsideBtn = styled(AiFillStepForward)`
   @media ${(props) => props.theme.breakpoints.sm} {
     /* top: 0; */
     left: 0px;
-    bottom: 230px;
+    bottom: 1.5rem;
     /* transform: translate(-150%, 75%); */
   }
   &.shiftButton {
@@ -55,9 +56,7 @@ export const MainAsideShiftMenu = styled.aside`
     opacity: 0;
     padding: 1.5rem;
     border-top-right-radius: 8px;
-    @media only screen and (min-width: 767) {
-      top: 0;
-    }
+    bottom: 0;
     @media ${(props) => props.theme.breakpoints.sm} {
     bottom: 90px;
   }

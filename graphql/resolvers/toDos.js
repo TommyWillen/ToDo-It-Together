@@ -142,6 +142,7 @@ module.exports = {
         category,
         isPublic,
         viewList,
+        color
       },
       context
     ) {
@@ -162,6 +163,7 @@ module.exports = {
             category,
             isPublic,
             viewList,
+            color,
             username: username,
             createdAt: new Date().toISOString(),
           });
@@ -185,6 +187,7 @@ module.exports = {
             category,
             isPublic,
             viewList,
+            color,
             username: username,
             createdAt: new Date().toISOString(),
           });
@@ -213,6 +216,7 @@ module.exports = {
         category,
         isPublic,
         viewList,
+        color,
       },
       context
     ) {
@@ -241,6 +245,7 @@ module.exports = {
             toDo.category = category;
             toDo.isPublic = isPublic;
             toDo.viewList = viewList;
+            toDo.color = color;
             await toDo.save();
             return toDo;
           } else {
@@ -257,6 +262,7 @@ module.exports = {
             toDo.category = category;
             toDo.isPublic = isPublic;
             toDo.viewList = viewList;
+            toDo.color = color
             await toDo.save();
             return toDo;
           }

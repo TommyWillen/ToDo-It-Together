@@ -3,7 +3,7 @@ const { gql } = require("apollo-server");
 module.exports = gql`
   type ToDo {
     id: ID!
-    name: String!
+    toDoName: String!
     time: String
     day: String
     month: String
@@ -21,6 +21,7 @@ module.exports = gql`
     viewList: [ViewList]!
     reminderCount: Int!
     commentCount: Int!
+    color: String!
     createdAt: String!
   }
   type Reminder {
@@ -104,6 +105,7 @@ module.exports = gql`
       canComment: Boolean!,
       category: String,
       isPublic: Boolean!,
+      color: String!,
       viewList: [CanViewList]
     ): ToDo!
     updateToDo(
@@ -120,6 +122,7 @@ module.exports = gql`
       canComment: Boolean!,
       category: String,
       isPublic: Boolean!,
+      color: String!
       viewList: [CanViewList]
     ): ToDo!
     deleteToDo(toDoId: ID!): String!

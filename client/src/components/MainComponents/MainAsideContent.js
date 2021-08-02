@@ -5,7 +5,7 @@ const MainAsideContent = () => {
         <div>
             <ul style={{listStyle: "none"}}>
                 <li><Link to="/profile">Profile</Link></li>
-                <li><Link to="/profile">Daily Todos</Link></li>
+                <li><Link to="/profile/todos/global">Global Todos</Link></li>
                 <li><Link to="/profile">Todos for the Month</Link></li>
                 <br />
                 <hr />

@@ -45,7 +45,7 @@ const ToDoSchema = new Schema({
             createdAt: String
         }
     ],
-    category: String,
+    category: {type: String, default: "todo"},
     isPublic: {type: Boolean, default: true},
     viewList: [
         {
@@ -53,6 +53,7 @@ const ToDoSchema = new Schema({
         }
     ],
     createdAt: String,
+    color: {type: String, default: "green"},
     user: {
         type: Schema.Types.ObjectId,
         ref: "Users"

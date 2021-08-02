@@ -1,5 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
-import { AuthContext } from "../../context/auth";
+import { useEffect, useRef, useState } from "react";
 
 import { Grid, Col } from "../Grid/GridElements";
 import MainAsideContent from "./MainAsideContent";
@@ -13,7 +12,6 @@ import {
 const MainComponents = (props) => {
   const asideRef = useRef(null);
   const [showAside, setShowAside] = useState(false);
-  const { user } = useContext(AuthContext);
   const handleShowAside = () => setShowAside(!showAside);
 
   useEffect(() => {
@@ -34,13 +32,13 @@ const MainComponents = (props) => {
 
   return (
     <Grid>
-      <Col className="full-height">
+      <Col className="full-height" as="aside">
       <AsideBtn onClick={handleShowAside} className={showAside ? "shiftButton" : "unshiftButton"} />
-        <MainAsideShiftMenu ref={asideRef} className={showAside ? "showAside" : "noShowAside"}>
+        <MainAsideShiftMenu ref={asideRef} className={showAside ? "showAside" : "noShowAside"} as="nav">
           <MainAsideContent />
         </MainAsideShiftMenu>
         
-        <MainAside>
+        <MainAside as="nav">
           <MainAsideContent />
         </MainAside>
       </Col>
