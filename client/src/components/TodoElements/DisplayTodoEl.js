@@ -1,22 +1,27 @@
-import { useRef, useState } from "react";
+import { Fragment, useContext, useRef, useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 
 import {
   CommentButton,
   CommentButtonArrow,
+  CommentBody,
   CommentCard,
   CommentCountSpan,
   CommentForm,
   CommentInput,
+  CommentUserImage,
+  CommentUsername,
 } from ".";
 import { CREATE_COMMENT_MUTATION } from "../../utils/graphql/todoMutations";
 import noUserPic from "../../assets/blank-profile-picture.png";
 import { GET_USERS_BY_USERNAMES } from "../../utils/graphql/userQueries";
+import { AuthContext } from "../../context/auth";
+import DeleteTodoButton from "./DeleteTodoButton";
 
 const DisplayTodoEl = ({ todo }) => {
+    const {user} = useContext(AuthContext)
   const [comment, setComment] = useState("");
   const commentInputRef = useRef(null);
-  console.log(todo);
   const [submitComment] = useMutation(CREATE_COMMENT_MUTATION, {
     update() {
       setComment("");
@@ -38,7 +43,21 @@ const DisplayTodoEl = ({ todo }) => {
     },
   });
 
-  console.log(commentUsername);
+  const commentDisplayFunc = (comment) => {
+      if (loading) {
+          return <p>Loading Comments...</p>
+      } else {
+        const commentUser = data.getUsersByUsernames.filter(user => user.username === comment.username)
+        return (
+            <>
+            <CommentUserImage src={commentUser[0].userImage ? commentUser[0].userImage : noUserPic} />
+            <CommentUsername>{commentUser[0].username}</CommentUsername>
+            <CommentBody>{comment.body}{comment.username === user.username || todo.username === user.username ? <DeleteTodoButton toDoId={todo.id} commentId={comment.id} />:null}</CommentBody>
+            </>
+        )
+      }
+
+  }
 
   return (
     <div>
@@ -80,8 +99,10 @@ const DisplayTodoEl = ({ todo }) => {
           </CommentForm>
           {todo.comments.length > 0 ? (
             todo.comments.map((comment) => (
-              <p key={comment.id}>{comment.body}</p>
-            ))
+                <Fragment key={comment.id}>
+                {commentDisplayFunc(comment)}
+                </Fragment>
+                ))
           ) : (
             <p>No comments add some</p>
           )}

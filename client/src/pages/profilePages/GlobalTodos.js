@@ -46,7 +46,7 @@ const GlobalTodos = () => {
                   <CompleteButton todo={todo} />
                 </Col>
                 <Col span="1" spanMd="1" spanSm="1">
-                  <DeleteTodoButton todoId={todo.id} username={user.username}  />
+                  <DeleteTodoButton toDoId={todo.id} username={user.username}  />
                 </Col>
               </TodoGrid>
             </li>

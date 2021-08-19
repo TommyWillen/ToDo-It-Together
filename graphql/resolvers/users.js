@@ -34,12 +34,12 @@ module.exports = {
         throw new Error(error);
       }
     },
-    async getUsersByUsernames(_, { usernames }) {
+    async getUsersByUsernames(_, { username }) {
       try {
         const users = await User.find({
-          username: { $in: usernames },
+          username: { $in: username },
         });
-        if (users) {
+        if (users.length > 0) {
           return users;
         } else {
           throw new Error("There was an error finding the requested users");

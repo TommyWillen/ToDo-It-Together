@@ -73,6 +73,7 @@ border-radius: 0 10px 10px 0;
 export const CommentCard = styled.div`
 width: 100%;
 background: #899499;
+padding: 0 0 5px 0;
 `
 
 export const CommentCountSpan = styled.span`
@@ -92,6 +93,27 @@ width: 50%;
 @media ${props => props.theme.breakpoints.md} {
   width: 100%;
 }
+`
+
+export const CommentUserImage = styled.img`
+border-radius: 50%;
+max-width: 30px;
+float: left;
+margin-top: 5px;
+margin-left: 10px;
+`
+
+export const CommentUsername = styled.p`
+float: left;
+clear: right;
+margin: 5px 0 0 0;
+font-weight: bold;
+`
+
+export const CommentBody = styled.p`
+clear: both;
+padding: 0;
+margin: 0;
 `
 
 export const CommentInput = styled.input`
@@ -206,6 +228,10 @@ export const TrashCanIcon = styled(IoTrashSharp)`
   margin-right: 0.3rem;
   color: #a9a9a9;
   background: transparent;
+  &.comment-trash {
+    color: #f5f5f5;
+    float: right;
+  }
   &:hover {
         color: maroon;
     }

@@ -148,3 +148,18 @@ export const CREATE_COMMENT_MUTATION = gql`
     }
   }
 `;
+
+export const DELETE_COMMENT_MUTATION = gql`
+  mutation deleteComment($toDoId: ID!, $commentId: ID!) {
+    deleteComment(toDoId: $toDoId, commentId: $commentId) {
+      id
+      comments {
+        id
+        username
+        createdAt
+        body
+      }
+      commentCount
+    }
+  }
+`;

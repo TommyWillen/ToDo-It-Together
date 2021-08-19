@@ -90,7 +90,7 @@ module.exports = gql`
       year: String,
     ): [ToDo]
     getUserByUsername(username: String!): User
-    getUsersByUsernames(username: [Usernames]!): [User]
+    getUsersByUsernames(username: [String]!): [User]
     getFriendRequests(username: String!): [FriendRequest]
     getRequestedFriends(username: String!): [FriendRequest]
   }
@@ -138,7 +138,7 @@ module.exports = gql`
     ): ToDo!
     deleteReminder(toDoId: ID!, reminderId: ID!): Reminder!
     createComment(toDoId: ID!, body: String!): ToDo!
-    deleteComment(toDoId: ID!, commentId: ID!): Comment!
+    deleteComment(toDoId: ID!, commentId: ID!): ToDo!
     sendFriendRequest(friendUsername: String!): FriendRequest!
     updateFriendRequest(friendRequestId: ID!, status: Int!): FriendRequest!
     removeFriend(friendId: String!, userId: String!): User!
