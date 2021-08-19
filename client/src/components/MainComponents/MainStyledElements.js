@@ -14,12 +14,13 @@ export const MainAside = styled.aside`
 export const MainBox = styled.main`
   background: rgb(245, 245, 220, 0.9);
   height: 100vh;
-  display: flex;
+  width: 100%;
   margin-left: ${(props) => (props.leftGap ? props.leftGap : "-2rem")};
   padding: 2rem 3rem;
   @media ${(props) => props.theme.breakpoints.md} {
     margin-left: 0;
-    width: 100vw;
+    margin-right: 0ch;
+    width: 100%;
   }
 `;
 

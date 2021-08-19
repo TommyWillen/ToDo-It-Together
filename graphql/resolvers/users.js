@@ -22,18 +22,32 @@ const generateToken = (user) => {
 
 module.exports = {
   Query: {
-      async getUserByUsername(_, {username}) {
-          try {
-              const user = await User.findOne({username: username})
-              if (user) {
-                  return user
-              } else {
-                  throw new Error("There is no user by that username")
-              }
-          } catch (error) {
-              throw new Error(error)
-          }
+    async getUserByUsername(_, { username }) {
+      try {
+        const user = await User.findOne({ username: username });
+        if (user) {
+          return user;
+        } else {
+          throw new Error("There is no user by that username");
+        }
+      } catch (error) {
+        throw new Error(error);
       }
+    },
+    async getUsersByUsernames(_, { usernames }) {
+      try {
+        const users = await User.find({
+          username: { $in: usernames },
+        });
+        if (users) {
+          return users;
+        } else {
+          throw new Error("There was an error finding the requested users");
+        }
+      } catch (error) {
+        throw new Error(error);
+      }
+    },
   },
   Mutation: {
     async login(_, { username, password }) {

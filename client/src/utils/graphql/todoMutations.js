@@ -1,19 +1,33 @@
 import { gql } from "@apollo/client";
 
-export const GET_USER_TODOS = gql`
-  query GetUserTodos(
-    $globality: Boolean!
-    $username: String!
+export const CREATE_TODO = gql`
+  mutation CreateTodoMutation(
+    $toDoName: String!
+    $time: String
     $day: String
     $month: String
     $year: String
+    $body: String!
+    $globality: Boolean!
+    $canRemind: Boolean!
+    $canComment: Boolean!
+    $category: String
+    $isPublic: Boolean!
+    $color: String!
   ) {
-    getSelectedToDosByUsername(
-      globality: $globality
-      username: $username
+    createToDo(
+      toDoName: $toDoName
+      time: $time
       day: $day
       month: $month
       year: $year
+      body: $body
+      globality: $globality
+      canRemind: $canRemind
+      canComment: $canComment
+      category: $category
+      isPublic: $isPublic
+      color: $color
     ) {
       id
       toDoName
@@ -24,7 +38,6 @@ export const GET_USER_TODOS = gql`
       username
       body
       isComplete
-      category
       reminders {
         id
         body
@@ -42,13 +55,8 @@ export const GET_USER_TODOS = gql`
         createdAt
       }
       isPublic
-      viewList {
-        id
-        username
-      }
       reminderCount
       commentCount
-      color
       createdAt
     }
   }
@@ -116,6 +124,27 @@ export const UPDATE_USER_TODO = gql`
       reminderCount
       commentCount
       createdAt
+    }
+  }
+`;
+
+export const DELETE_TODO = gql`
+  mutation DeleteTodoMutation($toDoId: ID!) {
+    deleteToDo(toDoId: $toDoId)
+  }
+`;
+
+export const CREATE_COMMENT_MUTATION = gql`
+  mutation createComment($toDoId: ID!, $body: String!) {
+    createComment(toDoId: $toDoId, body: $body) {
+      id
+      comments {
+        id
+        body
+        createdAt
+        username
+      }
+      commentCount
     }
   }
 `;

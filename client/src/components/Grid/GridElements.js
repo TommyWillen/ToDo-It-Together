@@ -34,7 +34,7 @@ export const Grid = styled.div`
 
   @media ${(props) => props.theme.breakpoints.md} {
     grid-template-columns: 2rem repeat(6, 1fr) 2rem;
-    gap: ${(props) => (props.gapMedium ? props.gapMedium : "0rem 1rem")};
+    gap: ${(props) => (props.gapMedium ? props.gapMedium : "0rem 0rem")};
     margin: ${(props) => (props.marginMedium ? props.marginMedium : 0)};
   }
   @media ${(props) => props.theme.breakpoints.sm} {

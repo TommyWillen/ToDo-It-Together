@@ -19,7 +19,8 @@ const Theme = {
     colors: {
         earthBlue: "#659DBD",
         earthBlack: "#212421",
-        pickerGreen: "#085025"
+        pickerGreen: "#085025",
+        cream: "#FBEEC1"
     }
 } 
 

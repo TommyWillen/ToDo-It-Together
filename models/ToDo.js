@@ -1,7 +1,10 @@
 const { model, Schema } = require("mongoose");
 
 const ToDoSchema = new Schema({
-    toDoName: String,
+    toDoName: {
+        type: String,
+        default: "todo"
+    },
     time: {
         type: String,
         default: ""

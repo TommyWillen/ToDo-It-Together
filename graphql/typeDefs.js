@@ -70,6 +70,9 @@ module.exports = gql`
   input CanViewList {
     username: String!
   }
+  input Usernames {
+    username: String!
+  }
   type Query {
     getSelectedToDosByUsername(
       globality: Boolean!,
@@ -87,6 +90,7 @@ module.exports = gql`
       year: String,
     ): [ToDo]
     getUserByUsername(username: String!): User
+    getUsersByUsernames(username: [Usernames]!): [User]
     getFriendRequests(username: String!): [FriendRequest]
     getRequestedFriends(username: String!): [FriendRequest]
   }

@@ -10,8 +10,10 @@ import {
   TodoHeadEl,
   TodoListEl,
 } from "../../components/TodoElements";
+import AddSingleGlobalTodo from "../../components/TodoElements/AddSingleGlobalTodo";
+import DeleteTodoButton from "../../components/TodoElements/DeleteTodoButton";
 import { AuthContext } from "../../context/auth";
-import { GET_USER_TODOS } from "../../utils/graphql/todoMutations";
+import { GET_USER_TODOS } from "../../utils/graphql/todoQueries";
 
 const GlobalTodos = () => {
   const { user } = useContext(AuthContext);
@@ -21,6 +23,9 @@ const GlobalTodos = () => {
       username: user.username,
     },
   });
+
+
+
   return (
     <div>
       <TodoHeadEl>{user.username}'s Global Todos!</TodoHeadEl>
@@ -41,7 +46,7 @@ const GlobalTodos = () => {
                   <CompleteButton todo={todo} />
                 </Col>
                 <Col span="1" spanMd="1" spanSm="1">
-                  <div />
+                  <DeleteTodoButton todoId={todo.id} username={user.username}  />
                 </Col>
               </TodoGrid>
             </li>
@@ -49,6 +54,7 @@ const GlobalTodos = () => {
         ) : (
           <li>No Todos! Click the "+" to add one!</li>
         )}
+        <AddSingleGlobalTodo username={user.username} />
       </TodoListEl>
     </div>
   );
