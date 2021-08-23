@@ -25,7 +25,6 @@ const CompleteButton = ({ todo, float }) => {
     await setIsComplete(!isComplete);
     updateTodoCompleteStatus();
   };
-console.log(float)
   return <>{isComplete ? <CompleteTodoButton onClick={handleCompleteButton} className={float ? "float-complete" : ""} /> : <IncompleteButton onClick={handleCompleteButton} className={float ? "float-complete" : ""} />}</>;
 };
 

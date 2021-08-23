@@ -40,7 +40,7 @@ const GlobalTodos = () => {
                   <ColorPicker todo={todo} />
                 </Col>
                 <Col span="9" spanMd="9" spanSm="9">
-                  <Link to={`/profile/todo/${todo.id}`}>{todo.body}</Link>
+                  <Link to={`/profile/todo/${todo.id}`}>{todo.toDoName}</Link>
                 </Col>
                 <Col span="1" spanMd="1" spanSm="1">
                   <CompleteButton todo={todo} />

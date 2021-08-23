@@ -41,12 +41,12 @@ export const AsideBtn = styled(AiFillStepForward)`
   @media ${(props) => props.theme.breakpoints.sm} {
     /* top: 0; */
     left: 0px;
-    bottom: 1.5rem;
+    bottom: 5.5rem;
     /* transform: translate(-150%, 75%); */
   }
   &.shiftButton {
     transform: rotate(180deg);
-    left: 196px;
+    left: 236px;
   }
 `;
 

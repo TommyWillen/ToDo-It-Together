@@ -5,7 +5,7 @@ import { PickerButton, PickerModalBox } from "./ColorPickerStyledElements";
 import { Row } from "../Grid/GridElements";
 import { UPDATE_USER_TODO } from "../../utils/graphql/todoMutations";
 
-const ColorPicker = ({ todo }) => {
+const ColorPicker = ({ todo, single }) => {
   const colorPickerRef = useRef(null);
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [todoColor, setTodoColor] = useState(todo.color);
@@ -52,9 +52,9 @@ const ColorPicker = ({ todo }) => {
     <div>
       <PickerModalBox
         ref={colorPickerRef}
-        className={showColorPicker ? "showPicker" : ""}
+        className={showColorPicker ? single ? "picker-modal-single showPicker" : "showPicker" : ""}
       >
-        <Row>
+        <Row >
           <PickerButton
             color="green"
             onClick={() => handleColorSelect("green")}
@@ -94,7 +94,7 @@ const ColorPicker = ({ todo }) => {
           />
         </Row>
       </PickerModalBox>
-      <PickerButton onClick={handleShowColorPicker} color={todoColor} />
+      <PickerButton onClick={handleShowColorPicker} color={todoColor} className={single ? "picker-single" : ""} />
     </div>
   );
 };

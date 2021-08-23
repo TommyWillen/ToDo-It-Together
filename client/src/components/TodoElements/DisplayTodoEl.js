@@ -66,13 +66,6 @@ const DisplayTodoEl = ({ todo }) => {
           Scheduled for {todo.month}/{todo.day}/{todo.year}
         </p>
       ) : null}
-      {/* content to add:
-             body
-             comments
-             category
-             comments
-             commentCount
-             */}
       <p>Category: {todo.category}</p>
       <p>Additional Notes: {todo.body}</p>
       {todo.canComment ? (

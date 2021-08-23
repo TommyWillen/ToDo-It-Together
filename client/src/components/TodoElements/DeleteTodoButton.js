@@ -8,7 +8,7 @@ import {
 } from "../../utils/graphql/todoMutations";
 import { GET_USER_TODOS } from "../../utils/graphql/todoQueries";
 
-const DeleteTodoButton = ({ toDoId, username, commentId, callback }) => {
+const DeleteTodoButton = ({ toDoId, username, commentId, callback, singleTodo }) => {
   const mutation = commentId ? DELETE_COMMENT_MUTATION : DELETE_TODO;
   const [deleteTodo] = useMutation(mutation, {
     variables: {
@@ -41,7 +41,7 @@ const DeleteTodoButton = ({ toDoId, username, commentId, callback }) => {
     },
   });
 
-  return <TrashCanIcon onClick={deleteTodo} className={commentId ? "comment-trash" : ""} />;
+  return <TrashCanIcon onClick={deleteTodo} className={commentId ? "comment-trash" : singleTodo ? "single-trash" : ""} />;
 };
 
 export default DeleteTodoButton;

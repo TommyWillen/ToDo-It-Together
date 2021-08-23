@@ -4,7 +4,6 @@ import { IoTrashSharp } from "react-icons/io5";
 import { GoPencil } from "react-icons/go";
 import { GiBroadheadArrow } from "react-icons/gi";
 
-
 export const CheckBoxLabel = styled.label`
   position: absolute;
   top: 0;
@@ -53,92 +52,92 @@ export const CheckBoxWrapper = styled.div`
 `;
 
 export const CommentButtonArrow = styled(GiBroadheadArrow)`
-transform: rotate(-45deg);
-color: ${props => props.theme.colors.earthBlack};
-padding: 6px 0 6px 0;
-`
+  transform: rotate(-45deg);
+  color: ${(props) => props.theme.colors.earthBlack};
+  padding: 6px 0 6px 0;
+`;
 
 export const CommentButton = styled.button`
-background: #f5f5f5;
-border: none;
-border-radius: 0 10px 10px 0;
-&:hover {
-  background: #808080;
-}
-&:hover ${CommentButtonArrow} {
-  color: #f5f5f5;
-}
-`
+  background: #f5f5f5;
+  border: none;
+  border-radius: 0 10px 10px 0;
+  &:hover {
+    background: #808080;
+  }
+  &:hover ${CommentButtonArrow} {
+    color: #f5f5f5;
+  }
+`;
 
 export const CommentCard = styled.div`
-width: 100%;
-background: #899499;
-padding: 0 0 5px 0;
-`
+  width: 100%;
+  background: #899499;
+  padding: 0 0 5px 0;
+`;
 
 export const CommentCountSpan = styled.span`
-background: ${props => props.theme.colors.earthBlack};
-color: ${props => props.theme.colors.cream};
-padding: 2px 5px 2px 5px;
-border-radius: 50%;
-font-size: 0.7rem;
-`
+  background: ${(props) => props.theme.colors.earthBlack};
+  color: ${(props) => props.theme.colors.cream};
+  padding: 2px 5px 2px 5px;
+  border-radius: 50%;
+  font-size: 0.7rem;
+`;
 
 export const CommentForm = styled.form`
-display: flex;
-flex-direction: row;
-border-radius: 20px;
-padding: 2px;
-width: 50%;
-@media ${props => props.theme.breakpoints.md} {
-  width: 100%;
-}
-`
+  display: flex;
+  flex-direction: row;
+  border-radius: 20px;
+  padding: 2px;
+  width: 50%;
+  @media ${(props) => props.theme.breakpoints.md} {
+    width: 90%;
+  }
+`;
 
 export const CommentUserImage = styled.img`
-border-radius: 50%;
-max-width: 30px;
-float: left;
-margin-top: 5px;
-margin-left: 10px;
-`
+  border-radius: 50%;
+  max-width: 30px;
+  float: left;
+  margin-top: 5px;
+  margin-left: 10px;
+`;
 
 export const CommentUsername = styled.p`
-float: left;
-clear: right;
-margin: 5px 0 0 0;
-font-weight: bold;
-`
+  float: left;
+  clear: right;
+  margin: 5px 0 0 0;
+  font-weight: bold;
+`;
 
 export const CommentBody = styled.p`
-clear: both;
-padding: 0;
-margin: 0;
-`
+  clear: both;
+  padding: 0;
+  margin: 0;
+`;
 
 export const CommentInput = styled.input`
-padding: 5px 2px 5px 8px;
-flex-grow: 2;
-border-radius: 10px 0 0 10px;
-outline: none;
-border-color: transparent;
-@media ${props => props.theme.breakpoints.md} {
-  width: 100%;
-}
-`
+  padding: 5px 2px 5px 8px;
+  flex-grow: 2;
+  border-radius: 10px 0 0 10px;
+  outline: none;
+  border-color: transparent;
+  @media ${(props) => props.theme.breakpoints.md} {
+    width: 100%;
+  }
+`;
 
 export const EditButton = styled(GoPencil)`
-float: right;
-margin-top: 3rem;
-cursor: pointer;
-+ h1 {
-  clear: left;
-}
-font-size: 1.8rem;
-@media ${(props) => props.theme.breakpoints.md} {
-font-size: 1.4rem;
+  float: right;
+  margin-top: 3rem;
+  cursor: pointer;
+  + h1 {
+    clear: left;
   }
-`
+  font-size: 1.8rem;
+  @media ${(props) => props.theme.breakpoints.md} {
+    font-size: 1.4rem;
+  }
+`;
 
 export const PlusButton = styled(ImPlus)`
   margin-top: 0.2rem;
@@ -175,12 +174,13 @@ export const TodoBodyInput = styled.input`
 `;
 
 export const TodoDisplayCard = styled.section`
-background: #fffff7;
-border-radius: 8px;
-& p, form {
-  padding: 0.2rem 1rem;
-}
-`
+  background: #fffff7;
+  border-radius: 8px;
+  & p,
+  form {
+    padding: 0.2rem 1rem;
+  }
+`;
 
 export const TodoGrid = styled.section`
   display: grid;
@@ -189,7 +189,6 @@ export const TodoGrid = styled.section`
 
 export const TodoHeadEl = styled.h1`
   font-size: 3.5rem;
-
   @media ${(props) => props.theme.breakpoints.md} {
     font-size: 2.5rem;
   }
@@ -232,7 +231,17 @@ export const TrashCanIcon = styled(IoTrashSharp)`
     color: #f5f5f5;
     float: right;
   }
-  &:hover {
-        color: maroon;
+  &.single-trash {
+    float: right;
+    color: ${(props) => props.theme.colors.earthBlack};
+    margin-top: 3rem;
+    cursor: pointer;
+    font-size: 1.8rem;
+    @media ${(props) => props.theme.breakpoints.md} {
+      font-size: 1.4rem;
     }
+  }
+  &:hover {
+    color: maroon;
+  }
 `;

@@ -60,8 +60,8 @@ const AddSingleGlobalTodo = ({username}) => {
 
   const [createGlobalTodo] = useMutation(CREATE_TODO, {
     variables: {
-      toDoName: "global todo",
-      body: values.body,
+      toDoName: values.body,
+      body: "No additional Notes",
       globality: true,
       canRemind: values.canRemind,
       canComment: values.canComment,
@@ -227,7 +227,7 @@ const AddSingleGlobalTodo = ({username}) => {
             <PlusButton onClick={handleAddGlobalTodo} />
           </Col>
           <Col>
-            <p>Add a global Todo!</p>
+            <p style={{margin: "0"}}>Add a global Todo!</p>
           </Col>
         </TodoGrid>
       )}
